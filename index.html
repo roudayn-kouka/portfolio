@@ -65,6 +65,7 @@ button{font:inherit;color:inherit}
 .orb i{width:7px;height:7px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink)}
 .orb:nth-child(even) i{background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
 main,footer{position:relative;z-index:4}
+main{overflow-x:clip}
 nav{z-index:50}
 
 /* cursor */
@@ -305,6 +306,16 @@ nav.scrolled .nav-in{background:rgba(18,10,28,.72);backdrop-filter:blur(18px);bo
 .flt:hover{color:var(--fg)}
 .flt.on{background:var(--holo);color:#170818;border-color:transparent}
 .flt b{font-weight:500;opacity:.6;margin-left:.3rem}
+.proj.wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:28px;align-items:center}
+.proj.wide .txt{display:flex;flex-direction:column;gap:1rem;min-width:0}
+.arch{position:relative;display:block;padding:0;border:1px solid var(--line-hi);border-radius:16px;overflow:hidden;background:#fff;cursor:zoom-in;box-shadow:0 30px 60px -30px rgba(0,0,0,.8),0 0 0 6px rgba(255,111,181,.06)}
+.proj.wide.tall{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:start}
+.arch.dark{background:#0b0d1a}
+.proj.feat:not(.wide) .arch{margin-top:.2rem}
+.arch img{width:100%;height:auto;display:block;transition:transform .5s}
+.arch:hover img{transform:scale(1.03)}
+.arch .zoom{position:absolute;right:10px;bottom:10px;font-family:var(--f-mono);font-size:.66rem;padding:.35rem .65rem;border-radius:999px;background:rgba(18,10,28,.85);color:var(--rose);border:1px solid var(--line-hi)}
+@media (max-width:900px){.proj.wide,.proj.wide.tall{grid-template-columns:minmax(0,1fr)}}
 .proj-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .proj-grid .proj[hidden]{display:none}
 
@@ -453,7 +464,7 @@ footer b{font-weight:500}
   .cert-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .loop-canvas{min-height:420px}
   .lbl{font-size:.62rem;padding:.3rem .55rem}
-  .contact-card{grid-template-columns:1fr}
+  .contact-card{grid-template-columns:minmax(0,1fr)}
   .orb{font-size:.62rem;padding:.3rem .6rem}
 }
 @media (max-width:420px){
@@ -774,50 +785,74 @@ footer b{font-weight:500}
       <p class="lede">Delivery platforms and security pipelines lead. AI and full-stack work follow, because I build the apps I deploy.</p>
     </div>
     <div class="feat-grid">
-      <article class="glass proj feat tilt ring spot rv">
-        <div class="proj-k"><b>★ flagship · cloud-native devops</b><span>AWS EKS</span></div>
-        <h3>Cloud-Native DevOps &amp; CI/CD Platform</h3>
-        <div class="flow"><span>Terraform</span><i>→</i><span>Jenkins</span><i>→</i><span class="sec">SonarQube</span><i>→</i><span class="sec">Trivy</span><i>→</i><span>ECR</span><i>→</i><span>ArgoCD</span><i>→</i><span>EKS</span><i>→</i><span>Grafana</span></div>
-        <ul>
-          <li>Three-tier React / Node / MongoDB app on <b>AWS EKS</b>, fully containerized.</li>
-          <li>Infrastructure and delivery automated with Terraform, Jenkins, Docker and Amazon ECR.</li>
-          <li>GitOps with ArgoCD; monitoring with Prometheus and Grafana.</li>
-        </ul>
-        <div class="chips"><span class="chip hot">AWS</span><span class="chip hot">Kubernetes</span><span class="chip">Terraform</span><span class="chip">Jenkins</span><span class="chip">ArgoCD</span><span class="chip cy">SonarQube</span><span class="chip cy">Trivy</span></div>
-        <div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/devsecops" target="_blank" rel="noopener">GitHub ↗</a></div>
+      <article class="glass proj feat wide tall tilt ring spot rv">
+        <div class="txt">
+          <div class="proj-k"><b>★ flagship · cloud-native devsecops</b><span>AWS EKS</span></div>
+          <h3>Three-Tier App on EKS · Full DevOps Pipeline</h3>
+          <p>React / Node.js / MongoDB application shipped to AWS EKS through a secured CI/CD pipeline and GitOps, from Terraform to monitored pods.</p>
+          <div class="flow"><span>Terraform</span><i>→</i><span>Jenkins</span><i>→</i><span class="sec">SonarQube</span><i>→</i><span class="sec">Dependency-Check</span><i>→</i><span class="sec">Trivy fs</span><i>→</i><span>Docker</span><i>→</i><span>ECR</span><i>→</i><span class="sec">Trivy image</span><i>→</i><span>ArgoCD</span><i>→</i><span>EKS</span></div>
+          <ul>
+            <li><b>Jenkins server provisioned with Terraform</b>; the pipeline runs code quality analysis, dependency check and file scan, builds the Docker image, pushes it to a <b>private ECR repo</b> and scans it there.</li>
+            <li>The pipeline updates the deployment file in GitHub and <b>ArgoCD syncs it to EKS</b>: frontend, backend and database tiers behind services and an ingress.</li>
+            <li>Application Load Balancer with a custom domain, <b>ECR and DB secrets</b> in Kubernetes, persistent volumes for MongoDB.</li>
+            <li>Cluster monitoring with <b>Prometheus + Grafana</b> installed through Helm; IAM-secured access throughout.</li>
+          </ul>
+          <div class="chips"><span class="chip hot">AWS EKS</span><span class="chip hot">Terraform</span><span class="chip">Jenkins</span><span class="chip">ECR</span><span class="chip">ArgoCD</span><span class="chip">Helm</span><span class="chip cy">SonarQube</span><span class="chip cy">Trivy</span><span class="chip">Prometheus</span><span class="chip">Grafana</span></div>
+          <div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/devsecops" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </div>
+        <button class="arch dark" id="eksBtn" aria-label="Enlarge the EKS DevOps architecture diagram"><img src="assets/media/eks-devops-architecture.gif" alt="Architecture: Terraform and Jenkins CI/CD with code quality, dependency check, Trivy scans, ECR, ArgoCD deploying frontend, backend and database tiers on EKS, monitored by Prometheus and Grafana" loading="lazy"><span class="zoom">⤢ architecture diagram</span></button>
       </article>
       <article class="glass proj feat tilt ring spot rv">
-        <div class="proj-k"><b>★ flagship · devsecops</b><span>AWS EC2 / EKS</span></div>
-        <h3>Netflix Clone DevSecOps Pipeline</h3>
-        <div class="flow"><span>GitHub</span><i>→</i><span>Jenkins</span><i>→</i><span class="sec">SonarQube</span><i>→</i><span class="sec">OWASP DC</span><i>→</i><span class="sec">Trivy fs+image</span><i>→</i><span>DockerHub</span><i>→</i><span>Helm · ArgoCD</span><i>→</i><span>K8s</span></div>
+        <div class="txt">
+          <div class="proj-k"><b>★ flagship · cloud architecture</b><span>AWS · production</span></div>
+          <h3>Containerized 3-Tier Architecture on AWS</h3>
+          <p>Designed and deployed a secure, highly available AWS architecture and migrated a traditional application to containers on ECS.</p>
+          <div class="flow"><span>Internet GW</span><i>→</i><span>CloudFront</span><i>→</i><span class="sec">AWS WAF</span><i>→</i><span>ALB</span><i>→</i><span>ECS frontend</span><i>→</i><span>ECS backend</span><i>→</i><span>ElastiCache</span><i>·</i><span>RDS Multi-AZ</span></div>
+          <ul>
+            <li>Frontend and backend ECS services in <b>private subnets across two Availability Zones</b>, each tier isolated by its own security group, with <b>ECS Auto Scaling</b>.</li>
+            <li>Edge protection with <b>CloudFront + AWS WAF</b> in front of the Application Load Balancer; NAT gateways for outbound traffic and a bastion host for admin access.</li>
+            <li><b>RDS Multi-AZ</b> (primary + standby), <b>ElastiCache Redis</b> for caching and <b>S3</b> for static assets.</li>
+          </ul>
+          <div class="chips"><span class="chip hot">ECS</span><span class="chip hot">RDS Multi-AZ</span><span class="chip">ElastiCache Redis</span><span class="chip">CloudFront</span><span class="chip cy">AWS WAF</span><span class="chip cy">Security Groups</span><span class="chip">ALB</span><span class="chip">S3</span><span class="chip">VPC</span></div>
+          <div class="proj-links"><span class="lnk" style="cursor:default">🔒 Confidential · no public repo</span></div>
+        </div>
+        <button class="arch" id="archBtn" aria-label="Enlarge the AWS architecture diagram"><img src="assets/media/aws-3tier-architecture.png" alt="AWS architecture: CloudFront, WAF, ALB, ECS frontend and backend across two AZs, RDS Multi-AZ, ElastiCache, S3" loading="lazy"><span class="zoom">⤢ architecture diagram</span></button>
+      </article>
+      <article class="glass proj feat tilt ring spot rv">
+        <div class="proj-k"><b>★ flagship · devsecops</b><span>AWS EC2 → K8s</span></div>
+        <h3>Netflix Clone · End-to-End DevSecOps</h3>
+        <div class="flow"><span>GitHub</span><i>→</i><span>Jenkins</span><i>→</i><span class="sec">SonarQube</span><i>→</i><span class="sec">OWASP DC</span><i>→</i><span class="sec">Trivy fs</span><i>→</i><span>DockerHub</span><i>→</i><span class="sec">Trivy image</span><i>→</i><span>ArgoCD · K8s</span></div>
         <ul>
-          <li>Automated DevSecOps delivery for a containerized app on AWS with Jenkins and Docker.</li>
-          <li>Security and quality gates in the pipeline: <b>source, dependency, filesystem and image scans</b>.</li>
-          <li>Deployed on Kubernetes through ArgoCD, observed live with Prometheus and Grafana.</li>
+          <li>Containerized app on AWS EC2 (Ubuntu 22.04) with build-time API key injection; Jenkins pipeline from checkout to deployment.</li>
+          <li>Security gates: <b>SonarQube quality gate, OWASP Dependency-Check, Trivy filesystem and image scans</b>.</li>
+          <li>Prometheus with Node Exporter and Jenkins metrics, <b>Grafana dashboards</b>, email notifications, then Kubernetes with Helm and <b>ArgoCD</b> GitOps.</li>
         </ul>
-        <div class="chips"><span class="chip hot">DevSecOps</span><span class="chip cy">Trivy</span><span class="chip cy">OWASP Dependency-Check</span><span class="chip">Jenkins</span><span class="chip">Helm</span><span class="chip">Grafana</span></div>
+        <div class="chips"><span class="chip hot">DevSecOps</span><span class="chip cy">Trivy</span><span class="chip cy">OWASP Dependency-Check</span><span class="chip cy">SonarQube</span><span class="chip">Jenkins</span><span class="chip">Grafana</span></div>
         <div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/DevSecOps-project-netflix-" target="_blank" rel="noopener">GitHub ↗</a></div>
       </article>
     </div>
     <div class="filters" role="tablist" aria-label="Filter projects">
-      <button class="flt on" data-f="all">All <b>12</b></button>
-      <button class="flt" data-f="ops">DevOps, Cloud &amp; Security <b>3</b></button>
-      <button class="flt" data-f="ai">AI <b>4</b></button>
+      <button class="flt on" data-f="all">All <b>15</b></button>
+      <button class="flt" data-f="ops">DevOps, Cloud &amp; Security <b>5</b></button>
+      <button class="flt" data-f="ai">AI <b>5</b></button>
       <button class="flt" data-f="web">Full-stack &amp; Web3 <b>5</b></button>
     </div>
     <div class="proj-grid" id="projGrid">
-      <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>cloud architecture</b><span>AWS</span></div><h3>Highly Available Web App on AWS</h3><p>Multi-AZ VPC, Application Load Balancer, EC2 Auto Scaling and RDS with failover.</p><div class="chips"><span class="chip">VPC</span><span class="chip">ALB</span><span class="chip">Auto Scaling</span><span class="chip">RDS</span><span class="chip">S3</span></div></article>
-      <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>iac · iot</b><span>Terraform</span></div><h3>CSTAM Human Performance Tracker</h3><p>Smartwatch-based performance tracking, with its cloud architecture provisioned in Terraform.</p><div class="chips"><span class="chip hot">Terraform</span><span class="chip">Cloud</span><span class="chip">IoT</span></div><div class="proj-links"><a class="lnk" href="https://github.com/SarraSoya/CSTAM" target="_blank" rel="noopener">GitHub ↗</a></div></article>
-      <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>security · api</b><span>Keycloak</span></div><h3>Secure GraphQL Recipe API</h3><p>GraphQL platform with Keycloak authentication, role-based access control and real-time subscriptions.</p><div class="chips"><span class="chip cy">Keycloak</span><span class="chip cy">RBAC</span><span class="chip">GraphQL</span><span class="chip">Node.js</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/API-GraphQl-project" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+      <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>ci/cd · dynamics 365</b><span>Azure DevOps</span></div><h3>Dynamics 365 Solution Export / Import Pipeline</h3><p>Azure DevOps YAML pipeline automating the export and import of Dynamics 365 / Dataverse solutions, with validation, packaging, Git versioning, backup before import, health checks and rollback.</p><div class="chips"><span class="chip hot">Azure DevOps</span><span class="chip hot">YAML</span><span class="chip">PowerShell</span><span class="chip">Dataverse</span><span class="chip">Git</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/azure-devops-pipeline" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+      <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>iac · ci/cd</b><span>AWS CodePipeline</span></div><h3>Terraform IaC DevOps with AWS CodePipeline</h3><p>Terraform infrastructure as code delivered through AWS CodePipeline, so AWS environments are provisioned by a pipeline instead of by hand.</p><div class="chips"><span class="chip hot">Terraform</span><span class="chip hot">AWS CodePipeline</span><span class="chip">IaC</span><span class="chip">AWS</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/terraform-iac-devops" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+      <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>ci/cd · automation</b><span>Jenkins → K8s</span></div><h3>DevOps CI/CD: Jenkins, Maven, Ansible, Docker, Kubernetes</h3><p>End-to-end delivery from source to containers: Jenkins jobs, Maven builds, Ansible automation between servers, Docker images on Tomcat, and Kubernetes deployments and services.</p><div class="chips"><span class="chip hot">Jenkins</span><span class="chip">Maven</span><span class="chip hot">Ansible</span><span class="chip">Docker</span><span class="chip">Tomcat</span><span class="chip">Kubernetes</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/devsecops-somple" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+      <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>iac · hackathon</b><span>Terraform</span></div><h3>CSTAM Human Performance Tracker</h3><p>Mobile app with an intelligent agent that measures human performance through a smartwatch, built at the CSTAM hackathon. I designed the full cloud architecture in Terraform for scalability, security and automation.</p><div class="chips"><span class="chip hot">Terraform</span><span class="chip">Cloud architecture</span><span class="chip">IoT</span><span class="chip">AI agent</span></div><div class="proj-links"><a class="lnk" href="https://github.com/SarraSoya/CSTAM" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+      <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>security · api</b><span>Keycloak</span></div><h3>Secure GraphQL Recipe API</h3><p>Apollo GraphQL API with Keycloak token introspection and role-based access control, real-time subscriptions, pagination, filtering and sorting, and a React + Vite SPA kept separate from the confidential API client.</p><div class="chips"><span class="chip cy">Keycloak</span><span class="chip cy">RBAC</span><span class="chip">GraphQL</span><span class="chip">Apollo</span><span class="chip">Node.js</span><span class="chip">MongoDB</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/API-GraphQl-project" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+      <article class="glass proj tilt spot" data-c="ai"><div class="proj-k"><b>ai · cybersecurity</b><span>Deep learning</span></div><h3>Deep Autoencoder for Network Anomaly Detection</h3><p>Unsupervised autoencoder (128→64→32→16→32→64→128, batch norm, dropout, MSE) that learns normal network traffic and flags high reconstruction error as potential intrusions, including unknown attacks.</p><div class="chips"><span class="chip hot">Deep Learning</span><span class="chip cy">Anomaly detection</span><span class="chip">Intrusion detection</span><span class="chip">Python</span></div></article>
       <article class="glass proj tilt spot" data-c="ai"><div class="proj-k"><b>agentic ai · 1st place</b><span>BH Assurance</span></div><h3>Agentic AI Platform for Insurance</h3><p>LLM agents with RAG and hybrid intent analysis over modular FastAPI services, on an event-driven Kafka backbone with Gmail API automation.</p><div class="chips"><span class="chip hot">LLMs</span><span class="chip hot">RAG</span><span class="chip">FastAPI</span><span class="chip">Kafka</span><span class="chip">Docker</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/BH-Assurance" target="_blank" rel="noopener">GitHub ↗</a></div></article>
-      <article class="glass proj tilt spot" data-c="ai"><div class="proj-k"><b>computer vision</b><span>ML + DL</span></div><h3>Plant Leaf Disease Detection</h3><p>Preprocessing, segmentation, feature extraction and hybrid ML/DL classification, with a full-stack interface for live predictions.</p><div class="chips"><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">CNN</span><span class="chip">React</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/Traitement-d-image---ML---DL" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+      <article class="glass proj tilt spot" data-c="ai"><div class="proj-k"><b>computer vision · full-stack</b><span>ML vs DL</span></div><h3>Plant Disease Detection</h3><p>Comparative study of classical ML and CNN on PlantVillage (54,000 images, 38 classes): preprocessing, segmentation, GLCM features. Shipped as a React + Node.js + MongoDB platform with a Python inference pipeline, packaged with Docker Compose.</p><div class="chips"><span class="chip hot">CNN</span><span class="chip">Random Forest</span><span class="chip">OpenCV</span><span class="chip">React</span><span class="chip">Node.js</span><span class="chip cy">Docker Compose</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/Traitement-d-image---ML---DL" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="ai"><div class="proj-k"><b>gen ai</b><span>Gemini API</span></div><h3>UniAssist AI Platform</h3><p>AI student assistant built on the Gemini API with a modular backend.</p><div class="chips"><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">MongoDB</span><span class="chip">Gemini</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/uniassist-hub" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="ai"><div class="proj-k"><b>healthtech · internship</b><span>Pixemantic</span></div><h3>App4Doctors</h3><p>Telemedicine platform with deep-learning OCR, AI medical notes and a chatbot assistant.</p><div class="chips"><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">MongoDB</span><span class="chip">OCR</span></div><div class="proj-links"><a class="lnk" href="https://github.com/pixemantic/app4doctor" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+      <article class="glass proj tilt spot" data-c="web"><div class="proj-k"><b>web3 · blockchain</b><span>Ethereum Sepolia</span></div><h3>ChainCert</h3><p>Blockchain diploma verification: universities issue and revoke certificates, students share them in one click, recruiters verify them without intermediaries. Each certificate is tied to a cryptographic hash and an IPFS CID.</p><div class="chips"><span class="chip hot">Solidity</span><span class="chip">Ethereum</span><span class="chip">IPFS</span><span class="chip">React</span><span class="chip">Ethers.js</span><span class="chip">Tailwind</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/ChainCert" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="web"><div class="proj-k"><b>edtech · startup</b><span>co-founder</span></div><h3>CarthaPlay</h3><p>Learning games for children with gamification and parental controls.</p><div class="chips"><span class="chip">React</span><span class="chip">Supabase</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/Carthaplay3" target="_blank" rel="noopener">GitHub ↗</a></div></article>
-      <article class="glass proj tilt spot" data-c="web"><div class="proj-k"><b>web3</b><span>Ethereum</span></div><h3>ChainCert</h3><p>Decentralized diploma verification on Ethereum and IPFS.</p><div class="chips"><span class="chip">Solidity</span><span class="chip">IPFS</span><span class="chip">React</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/ChainCert" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+      <article class="glass proj tilt spot" data-c="web"><div class="proj-k"><b>mobile</b><span>Flutter</span></div><h3>MovieApp</h3><p>Flutter movie manager: authentication, profiles, favorite playlists, MovieDB API, an admin panel that disables users instead of deleting them, and matching of users with over 75% similar taste.</p><div class="chips"><span class="chip hot">Flutter</span><span class="chip">Firebase Firestore</span><span class="chip">MovieDB API</span></div><div class="proj-links"><a class="lnk" href="https://github.com/tesnim123/MoviesApp" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+      <article class="glass proj tilt spot" data-c="web"><div class="proj-k"><b>edtech</b><span>Firebase</span></div><h3>RoboKidLab</h3><p>Interactive educational games where children play and learn safely in an intuitive, playful space.</p><div class="chips"><span class="chip">React</span><span class="chip">Firebase</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/robotkid-lab" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="web"><div class="proj-k"><b>agritech</b><span>MERN</span></div><h3>AgroVal+</h3><p>Jobs, training and agricultural services for farmers in Tunisia.</p><div class="chips"><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">MongoDB</span></div><div class="proj-links"><a class="lnk" href="https://github.com/opopoptima/Agrova-Plus" target="_blank" rel="noopener">GitHub ↗</a></div></article>
-      <article class="glass proj tilt spot" data-c="web"><div class="proj-k"><b>edtech</b><span>Firebase</span></div><h3>RoboKidLab</h3><p>Gamified learning platform introducing kids to robotics.</p><div class="chips"><span class="chip">React</span><span class="chip">Firebase</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/robotkid-lab" target="_blank" rel="noopener">GitHub ↗</a></div></article>
-      <article class="glass proj tilt spot" data-c="web"><div class="proj-k"><b>mobile</b><span>Flutter</span></div><h3>MovieApp</h3><p>Movie manager with Firebase auth, playlists and the MovieDB API.</p><div class="chips"><span class="chip">Flutter</span><span class="chip">Firebase</span><span class="chip">REST</span></div><div class="proj-links"><a class="lnk" href="https://github.com/tesnim123/MoviesApp" target="_blank" rel="noopener">GitHub ↗</a></div></article>
     </div>
   </div>
 </section>
@@ -1166,6 +1201,8 @@ function closeModal(){modal.hidden=true;document.body.style.overflow='';$('#mImg
 $('#mClose').addEventListener('click',closeModal);
 modal.addEventListener('click',function(e){if(e.target===modal)closeModal()});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)closeModal()});
+var eksB=$('#eksBtn');if(eksB)eksB.addEventListener('click',function(){openModal('Three-Tier App on EKS · Full DevOps Pipeline','Architecture · Terraform · Jenkins · Trivy · ECR · ArgoCD · EKS · Prometheus/Grafana','assets/media/eks-devops-architecture.gif','assets/media/eks-devops-architecture.gif')});
+var archB=$('#archBtn');if(archB)archB.addEventListener('click',function(){openModal('Containerized 3-Tier Architecture on AWS','Architecture diagram · ECS · RDS Multi-AZ · ElastiCache · S3','assets/media/aws-3tier-architecture.png','assets/media/aws-3tier-architecture.png')});
 $$('.doc-btn[data-doc]').forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.doc;openModal(b.dataset.title,'Signed attestation · PDF','assets/previews/'+k+'.jpg','assets/docs/'+k+'.pdf')})});
 
 /* ================= COPY ================= */
