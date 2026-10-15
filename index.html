@@ -316,6 +316,11 @@ nav.scrolled .nav-in{background:rgba(18,10,28,.72);backdrop-filter:blur(18px);bo
 .arch:hover img{transform:scale(1.03)}
 .arch .zoom{position:absolute;right:10px;bottom:10px;font-family:var(--f-mono);font-size:.66rem;padding:.35rem .65rem;border-radius:999px;background:rgba(18,10,28,.85);color:var(--rose);border:1px solid var(--line-hi)}
 @media (max-width:900px){.proj.wide,.proj.wide.tall{grid-template-columns:minmax(0,1fr)}}
+.more-wrap{display:flex;justify-content:center;margin-top:30px}
+.more-wrap .more-n{font-family:var(--f-mono);font-size:.72rem;font-weight:500;padding:.15rem .5rem;border-radius:999px;background:rgba(255,111,181,.14);color:var(--rose)}
+.more-wrap .more-ic{transition:transform .3s}
+#moreBtn[aria-expanded="true"] .more-ic{transform:rotate(180deg)}
+#moreProjects{animation:inUp .6s cubic-bezier(.2,.8,.2,1) both}
 .proj-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .proj-grid .proj[hidden]{display:none}
 
@@ -818,24 +823,22 @@ footer b{font-weight:500}
         </div>
         <button class="arch dark" id="cnInfraBtn" aria-label="Enlarge the Cloud-Native Infrastructure Automation architecture diagram"><img src="assets/media/cloud-native-infra-automation-architecture.gif" alt="Architecture: source control and Terraform, Jenkins CI with SonarQube, quality gate and Trivy scans, push to ECR, GitOps repo and Argo CD deploying frontend and backend to Amazon EKS with RDS MySQL, monitored by Prometheus, Grafana and Alertmanager" loading="lazy"><span class="zoom">⤢ architecture diagram</span></button>
       </article>
-      <article class="glass proj feat wide tall tilt ring spot rv">
+      <article class="glass proj feat wide tilt ring spot rv">
         <div class="txt">
-          <div class="proj-k"><b>★ flagship · cloud-native devsecops</b><span>AWS EKS</span></div>
-          <h3>Three-Tier App on EKS · Full DevOps Pipeline</h3>
-          <p>React / Node.js / MongoDB application shipped to AWS EKS through a secured CI/CD pipeline and GitOps, from Terraform to monitored pods.</p>
-          <div class="flow"><span>Terraform</span><i>→</i><span>Jenkins</span><i>→</i><span class="sec">SonarQube</span><i>→</i><span class="sec">Dependency-Check</span><i>→</i><span class="sec">Trivy fs</span><i>→</i><span>Docker</span><i>→</i><span>ECR</span><i>→</i><span class="sec">Trivy image</span><i>→</i><span>ArgoCD</span><i>→</i><span>EKS</span></div>
+          <div class="proj-k"><b>★ flagship · ci/cd automation</b><span>Jenkins → Ansible → K8s</span></div>
+          <h3>Automated Infrastructure Provisioning &amp; Kubernetes Deployment</h3>
+          <div class="flow"><span>Git push</span><i>→</i><span>GitHub</span><i>→</i><span>Jenkins</span><i>→</i><span>Maven</span><i>→</i><span>WAR</span><i>→</i><span>SSH</span><i>→</i><span class="sec">Ansible</span><i>→</i><span>Docker</span><i>→</i><span>Docker Hub</span><i>→</i><span>K8s</span></div>
           <ul>
-            <li><b>Jenkins server provisioned with Terraform</b>; the pipeline runs code quality analysis, dependency check and file scan, builds the Docker image, pushes it to a <b>private ECR repo</b> and scans it there.</li>
-            <li>The pipeline updates the deployment file in GitHub and <b>ArgoCD syncs it to EKS</b>: frontend, backend and database tiers behind services and an ingress.</li>
-            <li>Application Load Balancer with a custom domain, <b>ECR and DB secrets</b> in Kubernetes, persistent volumes for MongoDB.</li>
-            <li>Cluster monitoring with <b>Prometheus + Grafana</b> installed through Helm; IAM-secured access throughout.</li>
+            <li><b>Jenkins</b> jobs build on every push with <b>Maven</b> and hand the WAR artifact over SSH to an Ansible control node.</li>
+            <li><b>Ansible playbooks</b> build and push versioned Docker images (Tomcat + WAR) to Docker Hub, then deploy them.</li>
+            <li>Three deployment targets: direct WAR deploy on <b>Tomcat</b>, a container on a <b>Docker host</b>, or a <b>Kubernetes</b> Deployment and Service with self-healing replicas and rolling updates.</li>
           </ul>
-          <div class="chips"><span class="chip hot">AWS EKS</span><span class="chip hot">Terraform</span><span class="chip">Jenkins</span><span class="chip">ECR</span><span class="chip">ArgoCD</span><span class="chip">Helm</span><span class="chip cy">SonarQube</span><span class="chip cy">Trivy</span><span class="chip">Prometheus</span><span class="chip">Grafana</span></div>
-          <div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/devsecops" target="_blank" rel="noopener">GitHub ↗</a></div>
+          <div class="chips"><span class="chip hot">Jenkins</span><span class="chip hot">Ansible</span><span class="chip">Maven</span><span class="chip">Docker</span><span class="chip">Docker Hub</span><span class="chip">Tomcat</span><span class="chip">Kubernetes</span></div>
+          <div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/devsecops-somple" target="_blank" rel="noopener">GitHub ↗</a></div>
         </div>
-        <button class="arch dark" id="eksBtn" aria-label="Enlarge the EKS DevOps architecture diagram"><img src="assets/media/eks-devops-architecture.gif" alt="Architecture: Terraform and Jenkins CI/CD with code quality, dependency check, Trivy scans, ECR, ArgoCD deploying frontend, backend and database tiers on EKS, monitored by Prometheus and Grafana" loading="lazy"><span class="zoom">⤢ architecture diagram</span></button>
+        <button class="arch dark" id="ansibleBtn" aria-label="Enlarge the Jenkins, Ansible and Kubernetes architecture diagram"><img src="assets/media/jenkins-ansible-k8s-architecture.gif" alt="Architecture: Developer push to GitHub, Jenkins jobs with Maven build and WAR artifact published over SSH, Ansible playbooks building and pushing Docker images to Docker Hub, deploying to Tomcat, a Docker host or a Kubernetes cluster" loading="lazy"><span class="zoom">⤢ architecture diagram</span></button>
       </article>
-      <article class="glass proj feat tilt ring spot rv">
+      <article class="glass proj feat wide tilt ring spot rv">
         <div class="txt">
           <div class="proj-k"><b>★ flagship · cloud architecture</b><span>AWS · production</span></div>
           <h3>Containerized 3-Tier Architecture on AWS</h3>
@@ -864,10 +867,29 @@ footer b{font-weight:500}
         <button class="arch dark" id="netflixBtn" aria-label="Enlarge the Netflix DevSecOps architecture diagram"><img src="assets/media/netflix-devsecops-architecture.gif" alt="Netflix clone DevSecOps architecture: Jenkins pipeline with SonarQube, OWASP Dependency-Check and Trivy, DockerHub, Kubernetes with ArgoCD, Prometheus and Grafana" loading="lazy"><span class="zoom">⤢ architecture diagram</span></button>
         <div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/DevSecOps-project-netflix-" target="_blank" rel="noopener">GitHub ↗</a></div>
       </article>
+      <article class="glass proj feat tilt ring spot rv">
+        <div class="txt">
+          <div class="proj-k"><b>★ flagship · cloud-native devsecops</b><span>AWS EKS</span></div>
+          <h3>Three-Tier App on EKS · Full DevOps Pipeline</h3>
+          <p>React / Node.js / MongoDB application shipped to AWS EKS through a secured CI/CD pipeline and GitOps, from Terraform to monitored pods.</p>
+          <div class="flow"><span>Terraform</span><i>→</i><span>Jenkins</span><i>→</i><span class="sec">SonarQube</span><i>→</i><span class="sec">Dependency-Check</span><i>→</i><span class="sec">Trivy fs</span><i>→</i><span>Docker</span><i>→</i><span>ECR</span><i>→</i><span class="sec">Trivy image</span><i>→</i><span>ArgoCD</span><i>→</i><span>EKS</span></div>
+          <ul>
+            <li><b>Jenkins server provisioned with Terraform</b>; the pipeline runs code quality analysis, dependency check and file scan, builds the Docker image, pushes it to a <b>private ECR repo</b> and scans it there.</li>
+            <li>The pipeline updates the deployment file in GitHub and <b>ArgoCD syncs it to EKS</b>: frontend, backend and database tiers behind services and an ingress.</li>
+            <li>Application Load Balancer with a custom domain, <b>ECR and DB secrets</b> in Kubernetes, persistent volumes for MongoDB.</li>
+            <li>Cluster monitoring with <b>Prometheus + Grafana</b> installed through Helm; IAM-secured access throughout.</li>
+          </ul>
+          <div class="chips"><span class="chip hot">AWS EKS</span><span class="chip hot">Terraform</span><span class="chip">Jenkins</span><span class="chip">ECR</span><span class="chip">ArgoCD</span><span class="chip">Helm</span><span class="chip cy">SonarQube</span><span class="chip cy">Trivy</span><span class="chip">Prometheus</span><span class="chip">Grafana</span></div>
+        </div>
+        <button class="arch dark" id="eksBtn" aria-label="Enlarge the EKS DevOps architecture diagram"><img src="assets/media/eks-devops-architecture.gif" alt="Architecture: Terraform and Jenkins CI/CD with code quality, dependency check, Trivy scans, ECR, ArgoCD deploying frontend, backend and database tiers on EKS, monitored by Prometheus and Grafana" loading="lazy"><span class="zoom">⤢ architecture diagram</span></button>
+        <div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/devsecops" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </article>
     </div>
+    <div class="more-wrap"><button class="btn btn-ghost" id="moreBtn" aria-expanded="false" aria-controls="moreProjects">View more projects <b class="more-n">16</b> <span class="more-ic" aria-hidden="true">↓</span></button></div>
+    <div id="moreProjects" hidden>
     <div class="filters" role="tablist" aria-label="Filter projects">
-      <button class="flt on" data-f="all">All <b>17</b></button>
-      <button class="flt" data-f="ops">DevOps, Cloud &amp; Security <b>7</b></button>
+      <button class="flt on" data-f="all">All <b>16</b></button>
+      <button class="flt" data-f="ops">DevOps, Cloud &amp; Security <b>6</b></button>
       <button class="flt" data-f="ai">AI <b>5</b></button>
       <button class="flt" data-f="web">Full-stack &amp; Web3 <b>5</b></button>
     </div>
@@ -876,7 +898,6 @@ footer b{font-weight:500}
       <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>ci/cd · dynamics 365</b><span>Azure DevOps Server</span></div><h3>Dynamics 365 Solution Export / Import Pipeline</h3><p>YAML pipeline that moves on-premises Dynamics 365 solutions between environments: parameter checks, tag-triggered runs, connection validation, backup before import, post-deployment checks of workflows and plugin assemblies, and a smart rollback that restores only the components that failed. Exported packages are published for traceability.</p><div class="chips"><span class="chip hot">Azure DevOps</span><span class="chip hot">YAML</span><span class="chip">PowerShell</span><span class="chip">Dataverse</span><span class="chip cy">Smart rollback</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/azure-devops-pipeline" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>platform · alm tooling</b><span>.NET 8</span></div><h3>CRM ALM Center</h3><p>ASP.NET Core platform and dashboard for Dynamics 365 / Dataverse on-premises ALM: batch solution renaming, export and Git publishing, triggering and monitoring Azure DevOps pipelines with their logs, solution-layer and dependency analysis, and an environment matrix that spots version drift.</p><div class="chips"><span class="chip hot">.NET 8</span><span class="chip">ASP.NET Core</span><span class="chip">C#</span><span class="chip">PowerShell</span><span class="chip">Azure DevOps API</span><span class="chip">LibGit2Sharp</span><span class="chip">IIS</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/CRM-ALM-Center-Stage-inetum" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>iac · ci/cd</b><span>AWS CodePipeline</span></div><h3>Terraform IaC DevOps with AWS CodePipeline</h3><p>AWS CodePipeline and CodeBuild run Terraform per environment (dev and staging tfvars, S3 + DynamoDB remote state, credentials from Parameter Store) to provision a VPC, bastion host, security groups, an ALB with ACM HTTPS and Route 53 DNS, and an Auto Scaling group with target-tracking and scheduled scaling plus SNS alerts.</p><div class="chips"><span class="chip hot">Terraform</span><span class="chip hot">AWS CodePipeline</span><span class="chip">CodeBuild</span><span class="chip">VPC</span><span class="chip">ALB</span><span class="chip">Auto Scaling</span><span class="chip">Route 53</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/terraform-iac-devops" target="_blank" rel="noopener">GitHub ↗</a></div></article>
-      <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>ci/cd · automation</b><span>Jenkins → K8s</span></div><h3>DevOps CI/CD: Jenkins, Maven, Ansible, Docker, Kubernetes</h3><p>End-to-end delivery from source to containers: Jenkins jobs, Maven builds, Ansible automation between servers, Docker images on Tomcat, and Kubernetes deployments and services.</p><div class="chips"><span class="chip hot">Jenkins</span><span class="chip">Maven</span><span class="chip hot">Ansible</span><span class="chip">Docker</span><span class="chip">Tomcat</span><span class="chip">Kubernetes</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/devsecops-somple" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>iac · hackathon</b><span>Terraform</span></div><h3>CSTAM Human Performance Tracker</h3><p>Mobile app with an intelligent agent that measures human performance through a smartwatch, built at the CSTAM hackathon. I designed the full cloud architecture in Terraform for scalability, security and automation.</p><div class="chips"><span class="chip hot">Terraform</span><span class="chip">Cloud architecture</span><span class="chip">IoT</span><span class="chip">AI agent</span></div><div class="proj-links"><a class="lnk" href="https://github.com/SarraSoya/CSTAM" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>security · api</b><span>Keycloak</span></div><h3>Secure GraphQL Recipe API</h3><p>Apollo GraphQL API with Keycloak token introspection and role-based access control, real-time subscriptions, pagination, filtering and sorting, and a React + Vite SPA kept separate from the confidential API client.</p><div class="chips"><span class="chip cy">Keycloak</span><span class="chip cy">RBAC</span><span class="chip">GraphQL</span><span class="chip">Apollo</span><span class="chip">Node.js</span><span class="chip">MongoDB</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/API-GraphQl-project" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="ai"><div class="proj-k"><b>ai · cybersecurity</b><span>Deep learning</span></div><h3>Deep Autoencoder for Network Anomaly Detection</h3><p>Unsupervised autoencoder (128→64→32→16→32→64→128, batch norm, dropout, MSE) that learns normal network traffic and flags high reconstruction error as potential intrusions, including unknown attacks.</p><div class="chips"><span class="chip hot">Deep Learning</span><span class="chip cy">Anomaly detection</span><span class="chip">Intrusion detection</span><span class="chip">Python</span></div></article>
@@ -889,6 +910,7 @@ footer b{font-weight:500}
       <article class="glass proj tilt spot" data-c="web"><div class="proj-k"><b>mobile</b><span>Flutter</span></div><h3>MovieApp</h3><p>Flutter movie manager: authentication, profiles, favorite playlists, MovieDB API, an admin panel that disables users instead of deleting them, and matching of users with over 75% similar taste.</p><div class="chips"><span class="chip hot">Flutter</span><span class="chip">Firebase Firestore</span><span class="chip">MovieDB API</span></div><div class="proj-links"><a class="lnk" href="https://github.com/tesnim123/MoviesApp" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="web"><div class="proj-k"><b>edtech</b><span>Firebase</span></div><h3>RoboKidLab</h3><p>Interactive educational games where children play and learn safely in an intuitive, playful space.</p><div class="chips"><span class="chip">React</span><span class="chip">Firebase</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/robotkid-lab" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="web"><div class="proj-k"><b>agritech</b><span>MERN</span></div><h3>AgroVal+</h3><p>Jobs, training and agricultural services for farmers in Tunisia.</p><div class="chips"><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">MongoDB</span></div><div class="proj-links"><a class="lnk" href="https://github.com/opopoptima/Agrova-Plus" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+    </div>
     </div>
   </div>
 </section>
@@ -1239,6 +1261,13 @@ modal.addEventListener('click',function(e){if(e.target===modal)closeModal()});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)closeModal()});
 var eksB=$('#eksBtn');if(eksB)eksB.addEventListener('click',function(){openModal('Three-Tier App on EKS · Full DevOps Pipeline','Architecture · Terraform · Jenkins · Trivy · ECR · ArgoCD · EKS · Prometheus/Grafana','assets/media/eks-devops-architecture.gif','assets/media/eks-devops-architecture.gif')});
 var archB=$('#archBtn');if(archB)archB.addEventListener('click',function(){openModal('Containerized 3-Tier Architecture on AWS','Architecture diagram · ECS · RDS Multi-AZ · ElastiCache · S3','assets/media/aws-3tier-architecture.gif','assets/media/aws-3tier-architecture.gif')});
+var moreBtn=$('#moreBtn'),moreBox=$('#moreProjects');
+if(moreBtn)moreBtn.addEventListener('click',function(){
+  var open=moreBox.hidden;moreBox.hidden=!open;moreBtn.setAttribute('aria-expanded',String(open));
+  moreBtn.firstChild.nodeValue=open?'Show fewer projects ':'View more projects ';
+  if(!open){var y=moreBtn.getBoundingClientRect().top+window.pageYOffset-window.innerHeight*.5;window.scrollTo({top:Math.max(0,y),behavior:REDUCED?'auto':'smooth'})}
+});
+var anB=$('#ansibleBtn');if(anB)anB.addEventListener('click',function(){openModal('Automated Infrastructure Provisioning & Kubernetes Deployment','Architecture · Jenkins · Maven · Ansible · Docker · Tomcat · Kubernetes','assets/media/jenkins-ansible-k8s-architecture.gif','assets/media/jenkins-ansible-k8s-architecture.gif')});
 var nfB=$('#netflixBtn');if(nfB)nfB.addEventListener('click',function(){openModal('Netflix Clone · End-to-End DevSecOps','Architecture · Jenkins · SonarQube · OWASP · Trivy · DockerHub · ArgoCD · K8s','assets/media/netflix-devsecops-architecture.gif','assets/media/netflix-devsecops-architecture.gif')});
 var spB=$('#secPlatBtn');if(spB)spB.addEventListener('click',function(){openModal('Secure Cloud-Native DevSecOps Platform','Architecture · Terraform · Jenkins · OWASP · Trivy · ECR · Helm · Argo CD · EKS · RDS · KMS','assets/media/secure-devsecops-platform-architecture.gif','assets/media/secure-devsecops-platform-architecture.gif')});
 var ciB=$('#cnInfraBtn');if(ciB)ciB.addEventListener('click',function(){openModal('Cloud-Native Infrastructure Automation & DevSecOps','Architecture · Terraform · Jenkins · SonarQube · Trivy · ECR · GitOps · EKS · RDS MySQL','assets/media/cloud-native-infra-automation-architecture.gif','assets/media/cloud-native-infra-automation-architecture.gif')});
