@@ -871,11 +871,11 @@ footer b{font-weight:500}
         <div class="txt">
           <div class="proj-k"><b>★ flagship · cloud-native devsecops</b><span>AWS EKS</span></div>
           <h3>Three-Tier App on EKS · Full DevOps Pipeline</h3>
-          <p>React / Node.js / MongoDB application shipped to AWS EKS through a secured CI/CD pipeline and GitOps, from Terraform to monitored pods.</p>
+          <br>
           <div class="flow"><span>Terraform</span><i>→</i><span>Jenkins</span><i>→</i><span class="sec">SonarQube</span><i>→</i><span class="sec">Dependency-Check</span><i>→</i><span class="sec">Trivy fs</span><i>→</i><span>Docker</span><i>→</i><span>ECR</span><i>→</i><span class="sec">Trivy image</span><i>→</i><span>ArgoCD</span><i>→</i><span>EKS</span></div>
+          <br>
           <ul>
             <li><b>Jenkins server provisioned with Terraform</b>; the pipeline runs code quality analysis, dependency check and file scan, builds the Docker image, pushes it to a <b>private ECR repo</b> and scans it there.</li>
-            <li>The pipeline updates the deployment file in GitHub and <b>ArgoCD syncs it to EKS</b>: frontend, backend and database tiers behind services and an ingress.</li>
             <li>Application Load Balancer with a custom domain, <b>ECR and DB secrets</b> in Kubernetes, persistent volumes for MongoDB.</li>
             <li>Cluster monitoring with <b>Prometheus + Grafana</b> installed through Helm; IAM-secured access throughout.</li>
           </ul>
