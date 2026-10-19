@@ -317,6 +317,7 @@ nav.scrolled .nav-in{background:rgba(18,10,28,.72);backdrop-filter:blur(18px);bo
 .arch .zoom{position:absolute;right:10px;bottom:10px;font-family:var(--f-mono);font-size:.66rem;padding:.35rem .65rem;border-radius:999px;background:rgba(18,10,28,.85);color:var(--rose);border:1px solid var(--line-hi)}
 @media (max-width:900px){.proj.wide,.proj.wide.tall{grid-template-columns:minmax(0,1fr)}}
 .more-wrap{display:flex;justify-content:center;margin-top:30px}
+.more-feat{margin-top:30px}
 .more-wrap .more-n{font-family:var(--f-mono);font-size:.72rem;font-weight:500;padding:.15rem .5rem;border-radius:999px;background:rgba(255,111,181,.14);color:var(--rose)}
 .more-wrap .more-ic{transition:transform .3s}
 #moreBtn[aria-expanded="true"] .more-ic{transform:rotate(180deg)}
@@ -838,22 +839,6 @@ footer b{font-weight:500}
         </div>
         <button class="arch dark" id="ansibleBtn" aria-label="Enlarge the Jenkins, Ansible and Kubernetes architecture diagram"><img src="assets/media/jenkins-ansible-k8s-architecture.gif" alt="Architecture: Developer push to GitHub, Jenkins jobs with Maven build and WAR artifact published over SSH, Ansible playbooks building and pushing Docker images to Docker Hub, deploying to Tomcat, a Docker host or a Kubernetes cluster" loading="lazy"><span class="zoom">⤢ architecture diagram</span></button>
       </article>
-      <article class="glass proj feat wide tilt ring spot rv">
-        <div class="txt">
-          <div class="proj-k"><b>★ flagship · cloud architecture</b><span>AWS · production</span></div>
-          <h3>Containerized 3-Tier Architecture on AWS</h3>
-          <p>Designed and deployed a secure, highly available AWS architecture and migrated a traditional application to containers on ECS.</p>
-          <div class="flow"><span>Internet GW</span><i>→</i><span>CloudFront</span><i>→</i><span class="sec">AWS WAF</span><i>→</i><span>ALB</span><i>→</i><span>ECS frontend</span><i>→</i><span>ECS backend</span><i>→</i><span>ElastiCache</span><i>·</i><span>RDS Multi-AZ</span></div>
-          <ul>
-            <li>Frontend and backend ECS services in <b>private subnets across two Availability Zones</b>, each tier isolated by its own security group, with <b>ECS Auto Scaling</b>.</li>
-            <li>Edge protection with <b>CloudFront + AWS WAF</b> in front of the Application Load Balancer; NAT gateways for outbound traffic and a bastion host for admin access.</li>
-            <li><b>RDS Multi-AZ</b> (primary + standby), <b>ElastiCache Redis</b> for caching and <b>S3</b> for static assets.</li>
-          </ul>
-          <div class="chips"><span class="chip hot">ECS</span><span class="chip hot">RDS Multi-AZ</span><span class="chip">ElastiCache Redis</span><span class="chip">CloudFront</span><span class="chip cy">AWS WAF</span><span class="chip cy">Security Groups</span><span class="chip">ALB</span><span class="chip">S3</span><span class="chip">VPC</span></div>
-          <div class="proj-links"><span class="lnk" style="cursor:default">🔒 Confidential · no public repo</span></div>
-        </div>
-        <button class="arch" id="archBtn" aria-label="Enlarge the AWS architecture diagram"><img src="assets/media/aws-3tier-architecture.gif" alt="AWS architecture: CloudFront, WAF, ALB, ECS frontend and backend across two AZs, RDS Multi-AZ, ElastiCache, S3" loading="lazy"><span class="zoom">⤢ architecture diagram</span></button>
-      </article>
       <article class="glass proj feat tilt ring spot rv">
         <div class="proj-k"><b>★ flagship · devsecops</b><span>AWS EC2 → K8s</span></div>
         <h3>Netflix Clone · End-to-End DevSecOps</h3>
@@ -885,11 +870,54 @@ footer b{font-weight:500}
         <div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/devsecops" target="_blank" rel="noopener">GitHub ↗</a></div>
       </article>
     </div>
-    <div class="more-wrap"><button class="btn btn-ghost" id="moreBtn" aria-expanded="false" aria-controls="moreProjects">View more projects <b class="more-n">16</b> <span class="more-ic" aria-hidden="true">↓</span></button></div>
+    <div class="more-wrap"><button class="btn btn-ghost" id="moreBtn" aria-expanded="false" aria-controls="moreProjects">View more projects <b class="more-n">18</b> <span class="more-ic" aria-hidden="true">↓</span></button></div>
     <div id="moreProjects" hidden>
+    <div class="feat-grid more-feat">
+      <article class="glass proj feat wide tilt ring spot rv">
+        <div class="txt">
+          <div class="proj-k"><b>★ flagship · cloud architecture</b><span>AWS · production</span></div>
+          <h3>Containerized 3-Tier Architecture on AWS</h3>
+          <p>Designed and deployed a secure, highly available AWS architecture and migrated a traditional application to containers on ECS.</p>
+          <div class="flow"><span>Internet GW</span><i>→</i><span>CloudFront</span><i>→</i><span class="sec">AWS WAF</span><i>→</i><span>ALB</span><i>→</i><span>ECS frontend</span><i>→</i><span>ECS backend</span><i>→</i><span>ElastiCache</span><i>·</i><span>RDS Multi-AZ</span></div>
+          <ul>
+            <li>Frontend and backend ECS services in <b>private subnets across two Availability Zones</b>, each tier isolated by its own security group, with <b>ECS Auto Scaling</b>.</li>
+            <li>Edge protection with <b>CloudFront + AWS WAF</b> in front of the Application Load Balancer; NAT gateways for outbound traffic and a bastion host for admin access.</li>
+            <li><b>RDS Multi-AZ</b> (primary + standby), <b>ElastiCache Redis</b> for caching and <b>S3</b> for static assets.</li>
+          </ul>
+          <div class="chips"><span class="chip hot">ECS</span><span class="chip hot">RDS Multi-AZ</span><span class="chip">ElastiCache Redis</span><span class="chip">CloudFront</span><span class="chip cy">AWS WAF</span><span class="chip cy">Security Groups</span><span class="chip">ALB</span><span class="chip">S3</span><span class="chip">VPC</span></div>
+          <div class="proj-links"><span class="lnk" style="cursor:default">🔒 Confidential · no public repo</span></div>
+        </div>
+        <button class="arch" id="archBtn" aria-label="Enlarge the AWS architecture diagram"><img src="assets/media/aws-3tier-architecture.gif" alt="AWS architecture: CloudFront, WAF, ALB, ECS frontend and backend across two AZs, RDS Multi-AZ, ElastiCache, S3" loading="lazy"><span class="zoom">⤢ architecture diagram</span></button>
+      </article>
+      <article class="glass proj feat tilt ring spot rv">
+        <div class="proj-k"><b>★ ci/cd · gitops</b><span>AWS · kubeadm</span></div>
+        <h3>iVolve · CI/CD GitOps on AWS</h3>
+        <div class="flow"><span>Terraform</span><i>→</i><span>Ansible</span><i>→</i><span>Jenkins</span><i>→</i><span>pytest</span><i>→</i><span>Docker</span><i>→</i><span class="sec">Trivy</span><i>→</i><span>DockerHub</span><i>→</i><span>GitOps commit</span><i>→</i><span>Argo CD</span><i>→</i><span>K8s</span></div>
+        <ul>
+          <li><b>Terraform</b> builds the VPC, 4 EC2 instances, security groups per role, IAM, CloudWatch and SNS (encrypted S3 state, DynamoDB lock); <b>Ansible</b> installs Jenkins with JCasC, a kubeadm cluster and Argo CD.</li>
+          <li>Jenkins master + agent: tests, build, <b>blocking Trivy scan</b>, push of immutable <code>&lt;build&gt;-&lt;sha&gt;</code> tags, then an automatic GitOps commit that <b>Argo CD</b> syncs with self-heal and prune.</li>
+          <li>Secure by default: IMDSv2, encrypted volumes, Ansible Vault, non-root read-only pods, Pod Security <b>restricted</b>; CI checks with tfsec, ansible-lint, hadolint and kubeconform.</li>
+        </ul>
+        <div class="chips"><span class="chip hot">Terraform</span><span class="chip hot">Ansible</span><span class="chip">Jenkins</span><span class="chip cy">Trivy</span><span class="chip">Argo CD</span><span class="chip">Kubernetes</span><span class="chip">CloudWatch</span></div>
+        <button class="arch dark" id="ivolveBtn" aria-label="Enlarge the iVolve CI/CD GitOps architecture diagram"><img src="assets/media/ivolve-gitops-architecture.gif" alt="iVolve architecture: Terraform and Ansible provision Jenkins master and agent on AWS, pipeline tests, builds, scans with Trivy and pushes to DockerHub, then commits a new tag that Argo CD syncs to a kubeadm Kubernetes cluster; CloudWatch and SNS monitoring" loading="lazy"><span class="zoom">⤢ architecture diagram</span></button>
+        <div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/iVolve-CI-CD-GitOps-sur-AWS" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </article>
+      <article class="glass proj feat tilt ring spot rv">
+        <div class="proj-k"><b>★ iac · multi-environment</b><span>AWS CodePipeline</span></div>
+        <h3>Multi-Environment AWS Infrastructure as Code</h3>
+        <div class="flow"><span>GitHub</span><i>→</i><span>CodePipeline</span><i>→</i><span>CodeBuild DEV</span><i>→</i><span class="sec">Manual approval</span><i>→</i><span>CodeBuild STAG</span><i>→</i><span>terraform apply</span></div>
+        <ul>
+          <li>Every push runs <b>Terraform</b> through <b>AWS CodePipeline</b> on dev, then on staging after a <b>manual approval</b>; each environment has its own VPC, S3 state with DynamoDB lock, and DNS name.</li>
+          <li>Provisions a 3-AZ VPC, bastion and NAT gateway, an <b>HTTPS ALB with ACM</b> and Route 53, and a private <b>Auto Scaling group</b> (2 to 10) with target tracking, scheduled scaling, rolling instance refresh and SNS alerts.</li>
+        </ul>
+        <div class="chips"><span class="chip hot">Terraform</span><span class="chip hot">AWS CodePipeline</span><span class="chip">CodeBuild</span><span class="chip">ALB</span><span class="chip cy">ACM</span><span class="chip">Route 53</span><span class="chip">Auto Scaling</span><span class="chip">SNS</span></div>
+        <button class="arch dark" id="multiEnvBtn" aria-label="Enlarge the Multi-Environment AWS IaC architecture diagram"><img src="assets/media/multi-env-iac-architecture.gif" alt="Architecture: CodePipeline runs CodeBuild for dev, manual approval, then CodeBuild for staging; each environment gets a VPC across 3 AZs with ALB, bastion, NAT gateway, private Auto Scaling group, ACM, Route 53 and SNS" loading="lazy"><span class="zoom">⤢ architecture diagram</span></button>
+        <div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/Multi-Environment-AWS-Infrastructure-as-Code-with-CodePipeline" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </article>
+    </div>
     <div class="filters" role="tablist" aria-label="Filter projects">
-      <button class="flt on" data-f="all">All <b>16</b></button>
-      <button class="flt" data-f="ops">DevOps, Cloud &amp; Security <b>6</b></button>
+      <button class="flt on" data-f="all">All <b>15</b></button>
+      <button class="flt" data-f="ops">DevOps, Cloud &amp; Security <b>5</b></button>
       <button class="flt" data-f="ai">AI <b>5</b></button>
       <button class="flt" data-f="web">Full-stack &amp; Web3 <b>5</b></button>
     </div>
@@ -897,7 +925,6 @@ footer b{font-weight:500}
       <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>ci/cd · .net 8 → iis</b><span>Azure DevOps Server</span></div><h3>Offline CI/CD Pipeline for a .NET 8 API on IIS</h3><p>Two-stage pipeline for an air-gapped, on-premises Azure DevOps Server: offline NuGet restore, tests with coverage, SonarQube quality gate, packaging, then a C# deployment tool that configures the IIS app pool and site, deploys, runs a health check and rolls back automatically on failure. Every build is tagged in Git for audit.</p><div class="chips"><span class="chip hot">Azure DevOps Server</span><span class="chip hot">YAML</span><span class="chip">.NET 8</span><span class="chip">C#</span><span class="chip cy">SonarQube</span><span class="chip">IIS</span><span class="chip">PowerShell</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/Pipeline-API-Stage-inetum" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>ci/cd · dynamics 365</b><span>Azure DevOps Server</span></div><h3>Dynamics 365 Solution Export / Import Pipeline</h3><p>YAML pipeline that moves on-premises Dynamics 365 solutions between environments: parameter checks, tag-triggered runs, connection validation, backup before import, post-deployment checks of workflows and plugin assemblies, and a smart rollback that restores only the components that failed. Exported packages are published for traceability.</p><div class="chips"><span class="chip hot">Azure DevOps</span><span class="chip hot">YAML</span><span class="chip">PowerShell</span><span class="chip">Dataverse</span><span class="chip cy">Smart rollback</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/azure-devops-pipeline" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>platform · alm tooling</b><span>.NET 8</span></div><h3>CRM ALM Center</h3><p>ASP.NET Core platform and dashboard for Dynamics 365 / Dataverse on-premises ALM: batch solution renaming, export and Git publishing, triggering and monitoring Azure DevOps pipelines with their logs, solution-layer and dependency analysis, and an environment matrix that spots version drift.</p><div class="chips"><span class="chip hot">.NET 8</span><span class="chip">ASP.NET Core</span><span class="chip">C#</span><span class="chip">PowerShell</span><span class="chip">Azure DevOps API</span><span class="chip">LibGit2Sharp</span><span class="chip">IIS</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/CRM-ALM-Center-Stage-inetum" target="_blank" rel="noopener">GitHub ↗</a></div></article>
-      <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>iac · ci/cd</b><span>AWS CodePipeline</span></div><h3>Terraform IaC DevOps with AWS CodePipeline</h3><p>AWS CodePipeline and CodeBuild run Terraform per environment (dev and staging tfvars, S3 + DynamoDB remote state, credentials from Parameter Store) to provision a VPC, bastion host, security groups, an ALB with ACM HTTPS and Route 53 DNS, and an Auto Scaling group with target-tracking and scheduled scaling plus SNS alerts.</p><div class="chips"><span class="chip hot">Terraform</span><span class="chip hot">AWS CodePipeline</span><span class="chip">CodeBuild</span><span class="chip">VPC</span><span class="chip">ALB</span><span class="chip">Auto Scaling</span><span class="chip">Route 53</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/terraform-iac-devops" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>iac · hackathon</b><span>Terraform</span></div><h3>CSTAM Human Performance Tracker</h3><p>Mobile app with an intelligent agent that measures human performance through a smartwatch, built at the CSTAM hackathon. I designed the full cloud architecture in Terraform for scalability, security and automation.</p><div class="chips"><span class="chip hot">Terraform</span><span class="chip">Cloud architecture</span><span class="chip">IoT</span><span class="chip">AI agent</span></div><div class="proj-links"><a class="lnk" href="https://github.com/SarraSoya/CSTAM" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="ops"><div class="proj-k"><b>security · api</b><span>Keycloak</span></div><h3>Secure GraphQL Recipe API</h3><p>Apollo GraphQL API with Keycloak token introspection and role-based access control, real-time subscriptions, pagination, filtering and sorting, and a React + Vite SPA kept separate from the confidential API client.</p><div class="chips"><span class="chip cy">Keycloak</span><span class="chip cy">RBAC</span><span class="chip">GraphQL</span><span class="chip">Apollo</span><span class="chip">Node.js</span><span class="chip">MongoDB</span></div><div class="proj-links"><a class="lnk" href="https://github.com/roudayn-kouka/API-GraphQl-project" target="_blank" rel="noopener">GitHub ↗</a></div></article>
       <article class="glass proj tilt spot" data-c="ai"><div class="proj-k"><b>ai · cybersecurity</b><span>Deep learning</span></div><h3>Deep Autoencoder for Network Anomaly Detection</h3><p>Unsupervised autoencoder (128→64→32→16→32→64→128, batch norm, dropout, MSE) that learns normal network traffic and flags high reconstruction error as potential intrusions, including unknown attacks.</p><div class="chips"><span class="chip hot">Deep Learning</span><span class="chip cy">Anomaly detection</span><span class="chip">Intrusion detection</span><span class="chip">Python</span></div></article>
@@ -1267,6 +1294,8 @@ if(moreBtn)moreBtn.addEventListener('click',function(){
   moreBtn.firstChild.nodeValue=open?'Show fewer projects ':'View more projects ';
   if(!open){var y=moreBtn.getBoundingClientRect().top+window.pageYOffset-window.innerHeight*.5;window.scrollTo({top:Math.max(0,y),behavior:REDUCED?'auto':'smooth'})}
 });
+var ivB=$('#ivolveBtn');if(ivB)ivB.addEventListener('click',function(){openModal('iVolve · CI/CD GitOps on AWS','Architecture · Terraform · Ansible · Jenkins · Trivy · DockerHub · Argo CD · Kubernetes','assets/media/ivolve-gitops-architecture.gif','assets/media/ivolve-gitops-architecture.gif')});
+var meB=$('#multiEnvBtn');if(meB)meB.addEventListener('click',function(){openModal('Multi-Environment AWS Infrastructure as Code','Architecture · Terraform · CodePipeline · CodeBuild · ALB · ACM · Auto Scaling · Route 53 · SNS','assets/media/multi-env-iac-architecture.gif','assets/media/multi-env-iac-architecture.gif')});
 var anB=$('#ansibleBtn');if(anB)anB.addEventListener('click',function(){openModal('Automated Infrastructure Provisioning & Kubernetes Deployment','Architecture · Jenkins · Maven · Ansible · Docker · Tomcat · Kubernetes','assets/media/jenkins-ansible-k8s-architecture.gif','assets/media/jenkins-ansible-k8s-architecture.gif')});
 var nfB=$('#netflixBtn');if(nfB)nfB.addEventListener('click',function(){openModal('Netflix Clone · End-to-End DevSecOps','Architecture · Jenkins · SonarQube · OWASP · Trivy · DockerHub · ArgoCD · K8s','assets/media/netflix-devsecops-architecture.gif','assets/media/netflix-devsecops-architecture.gif')});
 var spB=$('#secPlatBtn');if(spB)spB.addEventListener('click',function(){openModal('Secure Cloud-Native DevSecOps Platform','Architecture · Terraform · Jenkins · OWASP · Trivy · ECR · Helm · Argo CD · EKS · RDS · KMS','assets/media/secure-devsecops-platform-architecture.gif','assets/media/secure-devsecops-platform-architecture.gif')});
